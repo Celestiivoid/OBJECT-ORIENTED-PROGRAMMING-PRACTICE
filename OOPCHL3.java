@@ -1,4 +1,4 @@
-class Car { // This is a composition or lets say Car has Engine
+class Cars { // This is a composition or lets say Car has Engine
     Engine engine;
 }
 class Engine { // And here, we can translate it to, Engine has horsepower. So, Car has an engine with horsepower.
