@@ -1,3 +1,4 @@
+package PETCARESYSTEM;
 import java.util.Scanner;
 
 /* A OOP PET CARE SYSTEM */
