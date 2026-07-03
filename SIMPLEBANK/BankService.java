@@ -48,8 +48,8 @@ class BankService {
         }
     }
     void deposit() {
+        double depositTotal = 0;
         while(true) {
-            double depositTotal = 0;
             System.out.println("=====DEPOSIT-MENU=====");
             System.out.println("Money on-hand: " + handsOnMoney);
             System.out.println("Enter amount to deposit: ");
@@ -69,7 +69,6 @@ class BankService {
                 BankAccount dp = bankAcc.get(i);
                 depositTotal = deposit;
                 dp.depositRule(deposit);
-                deposit += dp.getBalance();
                 handsOnMoney -= depositTotal;
             }
             System.out.println("Successfully deposited: " + depositTotal);
@@ -96,7 +95,7 @@ class BankService {
                 withdrawTotal = withdraw;
                 wd.withdrawRule(withdraw);
                 withdraw -= wd.getBalance();
-                handsOnMoney -= withdrawTotal;
+                handsOnMoney += withdrawTotal;
             }
             System.out.println("Successfully withdrew: " + withdrawTotal);
             return;
@@ -116,6 +115,7 @@ class BankService {
     }
     void transfer() {
         while(true) {
+            double transferTotal = 0;
             System.out.println("=====TRANSFER-MONEY-MENU=====");
 
             if(bankAcc.isEmpty()) {
@@ -150,8 +150,14 @@ class BankService {
             }
 
             BankAccount selectedAccount = bankAcc.get(pick - 1);
-            selectedAccount.transferRule(transfer);
-            
+
+            for(int i = 0; i < bankAcc.size(); i++) {
+                transferTotal = transfer;
+                BankAccount ts = bankAcc.get(i);
+                selectedAccount.transferRule(transfer);
+                transfer += ts.getBalance();
+            }
+            System.out.println("Successfully transferred: " + transferTotal);
         }
     }
 }
