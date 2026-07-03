@@ -16,6 +16,7 @@ class Student {
         if(sQuizScore <= 0.0 || sExamScore <= 0.0) {
             return "Score cannot go below 0.";
         }
+        
         if(sQuizScore > 100.0 || sExamScore > 100.0) {
             return "Score cannot exceed 100.";
         }
@@ -24,7 +25,10 @@ class Student {
         return "Successfully graded, " + studentName + ".";
     }
     String calculateAverage() {
-        average = quizScore + examScore / 2;
+        average = (quizScore + examScore) / 2;
+        if(average <= 0) {
+            return "NaN";
+        }
         return "Average: " + average;
     }
     String isPassed() {

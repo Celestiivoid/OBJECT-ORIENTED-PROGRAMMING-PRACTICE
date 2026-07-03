@@ -49,8 +49,10 @@ class StudentService {
                 viewStudents();
                 return;
             }
-
-            viewStudents();
+            for(int i = 0; i < student.size(); i ++) {
+            Student view = student.get(i);
+            System.out.println((i + 1) + ".) " + "Name: " + view.passName());
+            }
             System.out.println("Pick a student to grade: ");
             int option;
 
@@ -67,6 +69,11 @@ class StudentService {
             }
 
             Student selectedStudent = student.get(option - 1);
+
+            if(selectedStudent.passQuizScore() > 0.0) {
+                System.out.println("Student already graded.");
+                return;
+            }
 
             System.out.println("Enter quiz score: ");
             double quiz;
@@ -102,10 +109,54 @@ class StudentService {
                 return;
             }
 
+            for(int i = 0; i < student.size(); i++) {
+                Student viewReport = student.get(i);
+                System.out.println((i + 1) + ".) " + viewReport.passName());
+            }
 
+            System.out.println("Pick student: ");
+            int pick;
+
+            try {
+                pick = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(pick < 1 || pick > student.size()) {
+                System.out.println("Out of range.");
+                continue;
+            }
+
+            Student selectedStudent = student.get(pick - 1);
+            selectedStudent.displayReport();
+            return;
         }
     }
     void searchStudent() {
-    
+        while(true) {
+            System.out.println("=====SEARCH-STUDENT=====");
+
+            if(student.isEmpty()) {
+                System.out.println("No registered students.");
+                return;
+            }
+
+            System.out.println("Search student by name: ");
+            String searchName = scanner.nextLine();
+
+            for(int i = 0; i < student.size(); i++) {
+                Student search = student.get(i);
+                if(searchName.equalsIgnoreCase(search.passName())) {
+                    System.out.println("Student found!");
+                    System.out.println("Student name: " + search.passName() + " | Average: " + search.calculateAverage());
+                    return;
+                }
+            }
+
+            System.out.println("Student not found.");
+            return;
+        }
     }
 }
