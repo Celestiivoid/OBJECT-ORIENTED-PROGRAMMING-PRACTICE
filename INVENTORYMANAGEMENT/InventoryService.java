@@ -5,7 +5,6 @@ import java.util.ArrayList;
 class InventoryService {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Inventory> inventory = new ArrayList<>();
-
     void addProduct() {
         while(true) {
             System.out.println("=====ADD-PRODUCT=====");
@@ -21,9 +20,14 @@ class InventoryService {
             double price;
 
             try {
-                price = Double.parseDouble(scanner.nextLine()); 
+                price = Double.parseDouble(scanner.nextLine());
             } catch (NumberFormatException e) {
                 System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(price <= 0.0) {
+                System.out.println("Cannot set 0 or negative numbers for price field.");
                 continue;
             }
 
@@ -37,31 +41,27 @@ class InventoryService {
                 continue;
             }
 
+            if(quantity <= 0.0) {
+                System.out.println("Cannot set 0 or negative numbers for quantity field.");
+                continue;
+            }
+
             Inventory newProduct = new Inventory(product, price, quantity);
-            newProduct.addProductRule(price, quantity);
             inventory.add(newProduct);
+            System.out.println("Successfully added product.");
             return;
         }
     }
     void viewProduct() {
-        while(true) {
-            if(inventory.isEmpty()) {
-                System.out.println("No products are available.");
-                return;
-            }
 
-            for(int i = 0; i < inventory.size(); i++) {
-                Inventory view = inventory.get(i);
-                System.out.println((i + 1) + ".) " + " Product Name: " + view.getProductName() 
-                + " | Price: " + view.getProductPrice() 
-                + " | Quantity: " + view.getProductQuantity());
-            }
-        }
     }
-    void searchProduct() {
+    void buyProduct() {
 
     }
     void restockProduct() {
+
+    }
+    void searchProduct() {
 
     }
 }

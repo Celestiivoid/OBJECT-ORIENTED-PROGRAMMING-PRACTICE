@@ -1,17 +1,18 @@
 package INVENTORYMANAGEMENT;
 import java.util.Scanner;
 
-public class InventoryManagement {
+class InventoryManagement {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         InventoryService service = new InventoryService();
         while(true) {
-            System.out.println("=====INVENTORY-MANAGEMENT=====");
+            System.out.println("=====INVENTORY-SYSTEM=====");
             System.out.println("[1] Add Product");
-            System.out.println("[2] View Product");
-            System.out.println("[3] Search Product");
-            System.out.println("[4] Restock");
-            System.out.println("[5] Exit");
+            System.out.println("[2] View Products");
+            System.out.println("[3] Buy Product");
+            System.out.println("[4] Restock Product");
+            System.out.println("[5] Search Product");
+            System.out.println("[6] Exit");
 
             System.out.println("Enter option: ");
             int option;
@@ -23,17 +24,13 @@ public class InventoryManagement {
                 continue;
             }
 
-            if(option < 1 || option > 6) {
-                System.out.println("Out of range.");
-                continue;
-            }
-            
             switch(option) {
                 case 1 -> service.addProduct();
                 case 2 -> service.viewProduct();
-                case 3 -> service.searchProduct();
+                case 3 -> service.buyProduct();
                 case 4 -> service.restockProduct();
-                case 5 -> {
+                case 5 -> service.searchProduct();
+                case 6 -> {
                     while(true) {
                         System.out.println("Do you want to exit? (Yes/No)");
                         String exit = scanner.nextLine();

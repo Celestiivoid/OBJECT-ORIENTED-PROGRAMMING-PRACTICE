@@ -15,7 +15,6 @@ class Student {
         if(sQuizScore <= 0.0 || sExamScore <= 0.0) {
             return "Score cannot go below 0.";
         }
-
         if(sQuizScore > 100.0 || sExamScore > 100.0) {
             return "Score cannot exceed 100.";
         }

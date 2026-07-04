@@ -141,7 +141,6 @@ class BankService {
 
             System.out.println("Enter amount to transfer: ");
             double transfer;
-
             try {
                 transfer = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
