@@ -4,7 +4,6 @@ class Student {
     private String studentName;
     private double quizScore;
     private double examScore;
-    private double average;
 
     Student(String studentName) {
         this.studentName = studentName;
@@ -16,22 +15,20 @@ class Student {
         if(sQuizScore <= 0.0 || sExamScore <= 0.0) {
             return "Score cannot go below 0.";
         }
-        
+
         if(sQuizScore > 100.0 || sExamScore > 100.0) {
             return "Score cannot exceed 100.";
         }
-        quizScore += sQuizScore;
-        examScore += sExamScore;
+        quizScore = sQuizScore;
+        examScore = sExamScore;
         return "Successfully graded, " + studentName + ".";
     }
-    String calculateAverage() {
-        average = (quizScore + examScore) / 2;
-        if(average <= 0) {
-            return "NaN";
-        }
-        return "Average: " + average;
+    Double calculateAverage() {
+        return (quizScore + examScore) / 2;
+
     }
     String isPassed() {
+        double average = calculateAverage();
         if(average >= 75) {
             return "Status: Passed";
         }
@@ -47,13 +44,13 @@ class Student {
         System.out.println(isPassed());
     }
 
-    String passName() {
+    String getName() {
         return studentName;
     }
-    Double passQuizScore() {
+    Double getQuizScore() {
         return quizScore;
     }
-    Double passExamScore() {
+    Double getExamScore() {
         return examScore;
     }
     String isGraded() {

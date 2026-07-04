@@ -19,7 +19,7 @@ class StudentService {
 
             for(int i = 0; i < student.size(); i++) {
                 Student find = student.get(i);
-                if(name.equalsIgnoreCase(find.passName())) {
+                if(name.equalsIgnoreCase(find.getName())) {
                     System.out.println("Student name already exist.");
                     return;
                 }
@@ -40,7 +40,7 @@ class StudentService {
 
         for(int i = 0; i < student.size(); i ++) {
             Student view = student.get(i);
-            System.out.println((i + 1) + ".) " + " Name: " + view.passName() + "| Grade status: " + view.isGraded());
+            System.out.println((i + 1) + ".) " + " Name: " + view.getName() + "| Grade status: " + view.isGraded());
         }
     }
     void gradeStudents() {
@@ -51,7 +51,7 @@ class StudentService {
             }
             for(int i = 0; i < student.size(); i ++) {
             Student view = student.get(i);
-            System.out.println((i + 1) + ".) " + "Name: " + view.passName());
+            System.out.println((i + 1) + ".) " + "Name: " + view.getName());
             }
             System.out.println("Pick a student to grade: ");
             int option;
@@ -70,7 +70,7 @@ class StudentService {
 
             Student selectedStudent = student.get(option - 1);
 
-            if(selectedStudent.passQuizScore() > 0.0) {
+            if(selectedStudent.getQuizScore() > 0.0) {
                 System.out.println("Student already graded.");
                 return;
             }
@@ -111,7 +111,7 @@ class StudentService {
 
             for(int i = 0; i < student.size(); i++) {
                 Student viewReport = student.get(i);
-                System.out.println((i + 1) + ".) " + viewReport.passName());
+                System.out.println((i + 1) + ".) " + viewReport.getName());
             }
 
             System.out.println("Pick student: ");
@@ -148,9 +148,9 @@ class StudentService {
 
             for(int i = 0; i < student.size(); i++) {
                 Student search = student.get(i);
-                if(searchName.equalsIgnoreCase(search.passName())) {
+                if(searchName.equalsIgnoreCase(search.getName())) {
                     System.out.println("Student found!");
-                    System.out.println("Student name: " + search.passName() + " | Average: " + search.calculateAverage());
+                    System.out.println("Student name: " + search.getName() + " | Average: " + search.calculateAverage());
                     return;
                 }
             }
