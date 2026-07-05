@@ -11,14 +11,27 @@ class Inventory {
         this.productQuantity = productQuantity;
     }
 
-    void buy() {
-
+    String buy(int quantityAmount) {
+        if(quantityAmount > productQuantity) {
+            return "Insufficient quantity.";
+        }
+        if(quantityAmount < 0) {
+            return "Cannot set 0 or negative numbers.";
+        }
+        productQuantity -= quantityAmount;
+        return "Successfully bought: " + productName;
     }
-    void restock() {
-
+    String restock(int restockAmount) {
+        if(restockAmount < 0) {
+            return "Cannot set 0 or negative numbers.";
+        }
+        productQuantity += restockAmount;
+        return "Successfully restocked: " + productName;
     }
     void displayProduct() {
-
+        System.out.println("Product name: " + productName);
+        System.out.println("Price: " + productPrice);
+        System.out.println("Stock: " + productQuantity);
     }
 
     String getProductName() {

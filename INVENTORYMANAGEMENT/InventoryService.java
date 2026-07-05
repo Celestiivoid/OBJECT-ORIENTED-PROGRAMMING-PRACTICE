@@ -31,7 +31,7 @@ class InventoryService {
                 continue;
             }
 
-            System.out.println("Enter product quantity: ");
+            System.out.println("Enter product quantity: "); 
             int quantity;
 
             try {
@@ -53,15 +53,119 @@ class InventoryService {
         }
     }
     void viewProduct() {
+        if(inventory.isEmpty()) {
+            System.out.println("No products are available.");
+        }
 
+        for(int i = 0; i < inventory.size(); i++) {
+            Inventory view = inventory.get(i);
+            System.out.println((i + 1) + ".) " + view.getProductName() 
+            + " | Price: " + view.getProductPrice() 
+            + " | Stock: " + view.getProductQuantity());
+        }
     }
     void buyProduct() {
+        while(true) {
+            System.out.println("=====BUY-PRODUCT=====");
 
+            if(inventory.isEmpty()) {
+                viewProduct();
+            }
+
+            viewProduct();
+            System.out.println("Choose product: ");
+            int buy;
+
+            try {
+                buy = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(buy > inventory.size()) {
+                System.out.println("Out of range.");
+                continue;
+            }
+
+            Inventory selectedProduct = inventory.get(buy - 1);
+
+            System.out.println("Enter amount to buy: ");
+            int amount;
+
+            try {
+                amount = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            String result = selectedProduct.buy(amount);
+            System.out.println(result);
+            return;
+        }
     }
     void restockProduct() {
+        while(true) {
+            System.out.println("=====RESTOCK-PRODUCT=====");
 
+            if(inventory.isEmpty()) {
+                viewProduct();
+            }
+
+            viewProduct();
+            System.out.println("Pick a product to restock: ");
+            int restock;
+
+            try {
+                restock = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(restock > inventory.size()) {
+                System.out.println("Out of range.");
+                continue;
+            }
+
+            Inventory selectedRestock = inventory.get(restock - 1);
+
+            System.out.println("Enter amount to restock: ");
+            int amount;
+
+            try {
+                amount = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            String result = selectedRestock.restock(amount);
+            System.out.println(result);
+            return;
+        }
     }
     void searchProduct() {
+        while(true) {
+            System.out.println("=====SEARCH-PRODUCT=====");
+            System.out.println("Search a product by name: ");
+            String name = scanner.nextLine();
 
+            if(name.isEmpty()) {
+                System.out.println("Search field cannot be empty.");
+                return;
+            }
+            for (int i  = 0; i < inventory.size(); i++) {
+                Inventory search = inventory.get(i);
+                if(name.equalsIgnoreCase(search.getProductName())) {
+                    System.out.println("Product found!");
+                    search.displayProduct();
+                    return;
+                }
+            }
+            System.out.println("Product not found.");
+            return;
+        }
     }
 }
