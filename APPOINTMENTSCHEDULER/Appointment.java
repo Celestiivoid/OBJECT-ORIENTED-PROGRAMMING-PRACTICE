@@ -1,5 +1,6 @@
 package APPOINTMENTSCHEDULER;
 
+
 class Appointment {
     private String patientName;
     private String doctorName;
