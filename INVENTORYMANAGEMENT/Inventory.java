@@ -1,11 +1,11 @@
 package INVENTORYMANAGEMENT;
 
-class Inventory {
+class Product {
     private String productName;
     private double productPrice;
     private int productQuantity;
 
-    Inventory(String productName, double productPrice, int productQuantity) {
+    Product(String productName, double productPrice, int productQuantity) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
@@ -15,14 +15,14 @@ class Inventory {
         if(quantityAmount > productQuantity) {
             return "Insufficient quantity.";
         }
-        if(quantityAmount < 0) {
+        if(quantityAmount <= 0) {
             return "Cannot set 0 or negative numbers.";
         }
         productQuantity -= quantityAmount;
         return "Successfully bought: " + productName;
     }
     String restock(int restockAmount) {
-        if(restockAmount < 0) {
+        if(restockAmount <= 0) {
             return "Cannot set 0 or negative numbers.";
         }
         productQuantity += restockAmount;

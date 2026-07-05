@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 class InventoryService {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Inventory> inventory = new ArrayList<>();
+    static ArrayList<Product> inventory = new ArrayList<>();
     void addProduct() {
         while(true) {
             System.out.println("=====ADD-PRODUCT=====");
@@ -46,7 +46,7 @@ class InventoryService {
                 continue;
             }
 
-            Inventory newProduct = new Inventory(product, price, quantity);
+            Product newProduct = new Product(product, price, quantity);
             inventory.add(newProduct);
             System.out.println("Successfully added product.");
             return;
@@ -55,10 +55,11 @@ class InventoryService {
     void viewProduct() {
         if(inventory.isEmpty()) {
             System.out.println("No products are available.");
+            return;
         }
 
         for(int i = 0; i < inventory.size(); i++) {
-            Inventory view = inventory.get(i);
+            Product view = inventory.get(i);
             System.out.println((i + 1) + ".) " + view.getProductName() 
             + " | Price: " + view.getProductPrice() 
             + " | Stock: " + view.getProductQuantity());
@@ -83,12 +84,12 @@ class InventoryService {
                 continue;
             }
 
-            if(buy > inventory.size()) {
+            if(buy < 1 || buy > inventory.size()) {
                 System.out.println("Out of range.");
                 continue;
             }
 
-            Inventory selectedProduct = inventory.get(buy - 1);
+            Product selectedProduct = inventory.get(buy - 1);
 
             System.out.println("Enter amount to buy: ");
             int amount;
@@ -129,7 +130,7 @@ class InventoryService {
                 continue;
             }
 
-            Inventory selectedRestock = inventory.get(restock - 1);
+            Product selectedRestock = inventory.get(restock - 1);
 
             System.out.println("Enter amount to restock: ");
             int amount;
@@ -157,7 +158,7 @@ class InventoryService {
                 return;
             }
             for (int i  = 0; i < inventory.size(); i++) {
-                Inventory search = inventory.get(i);
+                Product search = inventory.get(i);
                 if(name.equalsIgnoreCase(search.getProductName())) {
                     System.out.println("Product found!");
                     search.displayProduct();
