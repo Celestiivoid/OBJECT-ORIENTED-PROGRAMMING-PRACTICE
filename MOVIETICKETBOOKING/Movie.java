@@ -3,7 +3,7 @@ package MOVIETICKETBOOKING;
 class Movie {
     private String movieTitle;
     private double ticketPrice;
-    private int availableSeatsMaximum;
+    private final int availableSeatsMaximum;
     private int availableSeats;
 
     Movie(String movieTitle, double ticketPrice, int availableSeats, int availableSeatsMaximum) {
@@ -26,24 +26,27 @@ class Movie {
         availableSeats -= seats;
         return "Booking successful.";
     }
-    String cancelSeats(int max) {
-        if(max <= 0) {
+    String cancelSeats(int seats) {
+        if(seats <= 0) {
             return "Cannot set 0 or negative numbers for cancel field.";
         }
-        availableSeats += max;
-        if(max > getAvailableSeatsMaximum()) {
-            return "You are over exceeding with the maximum available seats.";
+
+        if (getAvailableSeats() < getAvailableSeatsMaximum()) {
+            availableSeats += seats;
+            return "Successfully cancelled ticket.";
         }
-        return "Successfully cancelled ticket.";
+        if(seats > getAvailableSeatsMaximum()) {
+            return "Cannot cancel more than the maximum seats available.";
+        }
+        else {
+            return "Cannot cancel more than the maximum seats available.";
+        }
     }
     double calculateTotal(int seats) {
         double total = 0;
         if(seats <= 0) {
             return total = 0.0;
-        }
-        if(seats > availableSeats) {
-            return total = 0.0;
-        }
+       }
         total = ticketPrice;
         return total *= seats;
     }

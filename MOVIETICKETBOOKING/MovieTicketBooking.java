@@ -11,7 +11,8 @@ public class MovieTicketBooking {
             System.out.println("[3] Book Ticket");
             System.out.println("[4] Cancel Ticket");
             System.out.println("[5] Search Movie");
-            System.out.println("[6] Exit");
+            System.out.println("[6] View Sold Out Movies");
+            System.out.println("[7] Exit");
 
             System.out.println("\nEnter option: ");
             int option;
@@ -23,7 +24,7 @@ public class MovieTicketBooking {
                 continue;
             }
 
-            if(option < 1 || option > 6) {
+            if(option < 1 || option > 7) {
                 System.out.println("Out of range.");
                 continue;
             }
@@ -34,7 +35,8 @@ public class MovieTicketBooking {
                 case 3 -> service.bookTicket();
                 case 4 -> service.cancelTicket();
                 case 5 -> service.searchMovie();
-                case 6 -> {
+                case 6 -> service.soldOuts();
+                case 7 -> {
                     while(true) {
                         System.out.println("Do you want to exit? (Yes/No)");
                         String exit = scanner.nextLine();

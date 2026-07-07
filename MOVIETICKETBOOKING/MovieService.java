@@ -159,7 +159,7 @@ class MovieService {
             }
 
             if(cancel > selectedMovie.getAvailableSeatsMaximum()) {
-                System.out.println("You are over exceeding withe movies' maximum seats.");
+                System.out.println("Cannot cancel more than the maximum seats available.");
                 continue;
             }
 
@@ -190,6 +190,25 @@ class MovieService {
 
             System.out.println("Movie not found.");
             return;
+        }
+    }
+
+    void soldOuts() {
+        while(true) {
+            boolean ifSold = false;
+
+            for(int i = 0; i < movie.size(); i++) {
+                Movie sold = movie.get(i);
+                if(sold.getAvailableSeats() == 0) {
+                    ifSold = true;
+                    sold.displayMovie();
+                    return;
+                }
+            }
+
+            if(!ifSold) {
+                System.out.println("No sold out movies at the moment.");
+            }
         }
     }
 }
