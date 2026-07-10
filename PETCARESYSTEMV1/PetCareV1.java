@@ -1,9 +1,9 @@
-package PETCARESYSTEM;
+package PETCARESYSTEMV1;
 import java.util.Scanner;
 
 /* A OOP PET CARE SYSTEM */
 
-public class OOPCHL4 {
+public class PetCareV1 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         PetService service = new PetService();
