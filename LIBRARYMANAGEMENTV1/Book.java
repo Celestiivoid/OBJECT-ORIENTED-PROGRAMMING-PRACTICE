@@ -1,34 +1,33 @@
 package LIBRARYMANAGEMENTV1;
 
 public class Book {
-    String bookTitle;
-    String authorName;
-    boolean isBorrowed;
-    String borrowedBy;
+    private String bookTitle;
+    private String authorName;
+    private boolean isBorrowed;
+    private String borrowedBy = "None";
 
     Book(String bookTitle, String authorName, boolean isBorrowed) {
         this.bookTitle = bookTitle;
         this.authorName = authorName;
-        this.isBorrowed = false;
+        this.isBorrowed = isBorrowed;
     }
 
-    String borrow(int bookIndex) {
-        if(bookIndex <= 0) {
-            return "Cannot validate 0 or negative numbers.";
-        }
+    String borrow(String name) {
         isBorrowed = true;
+        borrowedBy = name;
         return "Successfully borrowed: " + bookTitle;
     }
-    String returnBook(int bookIndex) {
-        if(bookIndex <= 0) {
-            return "Cannot validate 0 or negative numbers.";
-        }
+    String returnBook() {
         isBorrowed = false;
+        borrowedBy = "None";
         return "Successfully returned: " + bookTitle;  
 
     }
     void displayBook() {
-
+        System.out.println("Book name: " + getBookTitle());
+        System.out.println("Author name: " + getAuthorName());
+        System.out.println("Book status: " + getIsBorrowed());
+        System.out.println("Borrower: " + getBorrowedBy());
     }
 
     String getBookTitle() {
@@ -45,13 +44,7 @@ public class Book {
             return "Available";
         }
     }
-    String getBorrowedBy(String name) {
-        if(name == null) {
-            return "None";
-        }
-        else {
-            borrowedBy = name;
-            return borrowedBy; 
-        }
+    String getBorrowedBy() {
+        return borrowedBy;
     }
 }
