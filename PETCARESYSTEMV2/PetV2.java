@@ -46,9 +46,6 @@ public class PetV2 {
         if(energyLevel >= 100) {
             return "Pet is not tired yet!";
         }
-        if(energyLevel > restEnergy) {
-            energyLevel = 100;
-        }
             
         hungerLevel += restHunger;  
         energyLevel += restEnergy;

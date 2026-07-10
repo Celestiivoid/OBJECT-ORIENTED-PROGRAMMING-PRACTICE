@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class PetCareV1 {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
-        PetService service = new PetService();
+        PetServiceV1 service = new PetServiceV1();
         while(true) {
             System.out.println("=====PET-CARE-SYSTEM=====");
             System.out.println("[1] Add Pet");

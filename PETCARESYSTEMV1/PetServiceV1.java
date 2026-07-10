@@ -1,7 +1,7 @@
 package PETCARESYSTEMV1;
 import java.util.Scanner;
 import java.util.ArrayList;
-class PetService {
+class PetServiceV1 {
     Scanner scanner = new Scanner(System.in);
     ArrayList<Pet> pets = new ArrayList<>();
 
