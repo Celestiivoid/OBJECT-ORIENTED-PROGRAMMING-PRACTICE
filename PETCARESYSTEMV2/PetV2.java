@@ -26,29 +26,31 @@ public class PetV2 {
         return "Successfully feed " + getPetName();
     }
     String play() {
-        final double playHunger = 15;
-        final double playEnergy = 20;
+        final double PLAY_HUNGER = 15.0;
+        final double PLAY_ENERGY = 25.0;
+        final double HUNGER_MAX = 100;
 
-        if(hungerLevel >= 100) {
-            return "Pet is too hungry to play!";
-        }
-        if(energyLevel == 0) {
+        if(energyLevel < PLAY_ENERGY) {
             return "Pet is too exhausted to play!";
         }
-        hungerLevel += playHunger;
-        energyLevel -= playEnergy;
+        if(hungerLevel + PLAY_HUNGER > HUNGER_MAX) {
+            return "Pet is too hungry to play!";
+        }
+        hungerLevel += PLAY_HUNGER;
+        energyLevel -= PLAY_ENERGY;
         return "You played with " + getPetName();
     }
     String rest() {
-        final double restHunger = 5;
-        final double restEnergy = 100;
+         double restHunger = 5;
+         double restEnergy = 100;
+         double energyLevelMax = 100;
 
-        if(energyLevel >= 100) {
-            return "Pet is not tired yet!";
+        if(energyLevel >= energyLevelMax) {
+            return "Pets' energy full";
         }
-            
-        hungerLevel += restHunger;  
-        energyLevel += restEnergy;
+
+        energyLevel += restEnergy - energyLevel;
+        hungerLevel += restHunger;
         return getPetName() + " is ready to play!";
     }
     void displayPet() {
@@ -81,7 +83,7 @@ public class PetV2 {
             return "Hungry";
         }
         else {
-            return "Pet ran away.";
+            return "Calm.";
         }
     }
 }
