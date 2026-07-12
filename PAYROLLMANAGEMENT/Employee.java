@@ -8,8 +8,7 @@ public class Employee {
     private double grossSalary;
     private boolean isProcessed;
     private boolean isPaid;
-    private double afterTax;
-    private double taxRate = 0.10;
+    private final double TAX_RATE = 0.10;
     private final int REGULAR_HOURS = 160;
 
     Employee(String employeeName, String position, double basicSalary, int hoursWorked) {
@@ -26,35 +25,61 @@ public class Employee {
         final double HOURLY_RATE = basicSalary / REGULAR_HOURS;
         final double OVERTIME_HOURS = hoursWorked - REGULAR_HOURS;
         final double OVERTIME_PAY = HOURLY_RATE * OVERTIME_HOURS * 1.5;
+        if(isProcessed && isPaid) {
+            return "Payment already processed for " + getEmployeeName(); 
+        }
         if(hoursWorked <= REGULAR_HOURS) {
-            grossSalary += basicSalary;
+            grossSalary = basicSalary;
         }
         if(hoursWorked > REGULAR_HOURS) {
-            grossSalary += OVERTIME_PAY + basicSalary;
+            grossSalary = OVERTIME_PAY + basicSalary;
         }
-        afterTax += basicSalary - basicSalary * taxRate;
         isProcessed = true;
         isPaid = true;
         return "Sucessfully processed employee.";
     }
 
     void displayPaySlip() {
-        final double OVERTIME_HOURS_DISPLAY = hoursWorked - REGULAR_HOURS;
-        final double TAX = basicSalary * taxRate;
-        final double GROSS = grossSalary - basicSalary;
-        final double TOTAL = basicSalary + GROSS;
-        final double GROSS_AFTER_TAX = GROSS - basicSalary * taxRate;
+        double OVERTIME_HOURS_DISPLAY = hoursWorked - REGULAR_HOURS;
+        double GROSS = grossSalary - basicSalary;
+        final double TAX = basicSalary * TAX_RATE;
+        double GROSS_TAX = GROSS * TAX_RATE;
+        final double TOTAL_TAX = TAX + GROSS_TAX;
+        double TOTAL = basicSalary + GROSS;
+        double AFTER_TAX = TOTAL - TOTAL_TAX;
+
 
         System.out.println("Employees' name: " + getEmployeeName());
         System.out.println("Position: " + getPosition());
         System.out.println("Hours worked: " + getHoursWorked());
-        System.out.println("Overtime hours: " + OVERTIME_HOURS_DISPLAY);
+        if(hoursWorked <= REGULAR_HOURS) {
+            OVERTIME_HOURS_DISPLAY = 0.0;
+            System.out.println("Overtime hours: " + OVERTIME_HOURS_DISPLAY);
+        }
+        else {
+            System.out.println("Overtime hours: " + OVERTIME_HOURS_DISPLAY);
+        }
         System.out.println("Salary without gross: " + basicSalary);
-        System.out.println("Gross amount: " + GROSS);
-        System.out.println("Tax: " + TAX);
-        System.out.println("Gross total after tax credit: " + GROSS_AFTER_TAX);
-        System.out.println("Total after tax credit: " + afterTax);
-        System.out.println("Overall total with gross: " + TOTAL);
+        System.out.println("Salary tax: " + TAX);
+        if(isProcessed == false && isPaid == false) {
+            GROSS_TAX = 0;
+            AFTER_TAX = 0;
+            GROSS = 0;
+            TOTAL = 0;
+            String result = " (Not yet processed.)";
+            System.out.println("Gross amount: " + GROSS + result);
+            System.out.println("Gross tax: " + GROSS_TAX + result);
+            System.out.println("Overall total with gross: " + TOTAL + result);
+            System.out.println("Total after tax: " + AFTER_TAX + result);
+        }
+        else {
+            System.out.println("Gross amount: " + GROSS);
+            System.out.println("Gross tax: " + GROSS_TAX);
+            System.out.println("Overall total with gross: " + TOTAL);
+            System.out.println("Total tax: " + TOTAL_TAX);
+            System.out.println("Total after tax: " + AFTER_TAX);
+        }
+        System.out.println("Processed: " + getIsProcessed());
         System.out.println("Status: " + getIsPaid());
     }
 

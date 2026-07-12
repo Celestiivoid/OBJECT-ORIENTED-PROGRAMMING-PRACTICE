@@ -111,6 +111,7 @@ class PayrollService {
 
             if(option < 1 || option > employee.size()) {
                 System.out.println("Out of range.");
+                continue;
             }
 
             Employee selecetedEmployee = employee.get(option - 1);
