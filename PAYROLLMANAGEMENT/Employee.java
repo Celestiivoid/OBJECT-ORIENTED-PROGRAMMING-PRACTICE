@@ -1,6 +1,6 @@
 package PAYROLLMANAGEMENT;
 
-public class Employee {
+ public class Employee {
     private String employeeName;
     private String position;
     private double basicSalary;
