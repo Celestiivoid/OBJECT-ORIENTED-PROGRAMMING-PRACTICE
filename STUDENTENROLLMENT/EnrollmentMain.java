@@ -37,7 +37,7 @@ public class EnrollmentMain {
                 case 1 -> service.addStudent();
                 case 2 -> service.addCourse();
                 case 3 -> service.viewStudents();
-                case 4 -> service.enrollStudent();
+                case 4 -> service.viewCourses();
                 case 5 -> service.enrollStudent();
                 case 6 -> service.dropCourse();
                 case 7 -> service.viewStudentCourse();

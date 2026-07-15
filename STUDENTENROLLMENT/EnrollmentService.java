@@ -81,26 +81,127 @@ class EnrollmentService {
                 continue;
             }
 
-            Course newCourse = new Course(code, name, max);
+            System.out.println("Enter available slots: ");
+            int available;
+
+            try {
+                available = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(available <= 0) {
+                System.out.println("Cannot validate 0 or negative numbers.");
+                continue;
+            }
+
+            Course newCourse = new Course(code, name, max, available);
             course.add(newCourse);
             System.out.println("Successfully added course!");
             return;
         }
     }
-    void viewStudents() {
 
+    void viewStudents() {
+        if(student.isEmpty()) {
+            System.out.println("No available students.");
+            return;
+        }
+
+        for(int i = 0; i < student.size(); i++) {
+            Student view = student.get(i);
+            System.out.println(
+              "Student name: " + view.getStudentName() 
+            + " | Student ID: " + view.getStudentID());
+        }
     }
     void viewCourses() {
-
+        if(course.isEmpty()) {
+            System.out.println("No available courses.");
+            return;
+        }
+        for(int i = 0; i < course.size(); i++) {
+            Course view = course.get(i);
+            System.out.println(
+              "Course code: " + view.getCourseCode() 
+            + " | Course name: " + view.getCourseTitle() 
+            + " | Maximum slots: " + view.getMaxSlot() 
+            + " | Available slots : " 
+            + view.getAvailableSlots());
+        }
     }
     void enrollStudent() {
+        while(true) {
+            System.out.println("=====ENROLL-STUDENT=====");
+            if(student.isEmpty()) {
+                viewStudents();
+                return;
+            }
 
+            viewStudents(); 
+            System.out.println("Select a student to enroll: ");
+            int studentOption;
+
+            try {
+                studentOption = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(studentOption < 1 || studentOption > student.size()) {
+                System.out.println("Out of range.");
+            }
+
+            Student selectedStudent = student.get(studentOption - 1);
+
+            viewCourses();
+            System.out.println("Select a course to enroll: ");
+            int courseOption;
+
+            try {
+                courseOption = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(courseOption < 1 || courseOption > course.size()) {
+                System.out.println("Out of range.");
+                continue;
+            }
+
+            Course selectedCourse = course.get(courseOption - 1);
+            String result1 = selectedStudent.enrollCourse();
+            int result2 = selectedCourse.addStudents();
+            System.out.println(result1);
+            System.out.println(result2);
+            System.out.println(selectedCourse.getAvailableSlots());
+            return;
+        }
     }
     void dropCourse() {
 
     }
     void viewStudentCourse() {
+        System.out.println("=====VIEW-STUDENTS=====");
+        if(student.isEmpty()) {
+            viewStudents();
+        }
 
+        for(int i = 0; i < student.size(); i++) {
+            Student viewS = student.get(i);
+            System.out.println("Student name: " + viewS.getStudentName() 
+                + " | Student ID: " + viewS.getStudentID());
+            System.out.println("Courses: ");
+            for(int j = 0; j < course.size(); j++) {
+                Course viewC = course.get(j);
+                System.out.println((j + 1) + ".) " + viewC.getCourseTitle() 
+                + " | Course code: " + viewC.getCourseCode() );
+            }
+            System.out.println("Status: " + viewS.getIsEnrolled());
+        }
     }
     void viewCourseStudent() {
 

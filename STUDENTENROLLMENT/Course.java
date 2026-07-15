@@ -16,8 +16,8 @@ class Course {
         this.availableSlots = availableSlots;
     }
 
-    void addStudents() {
-
+    int addStudents() {
+       return availableSlots--;   
     }
     void removeStudents() {
 
@@ -25,8 +25,10 @@ class Course {
     void displayCourse() {
 
     }
-    void isFull() {
 
+
+    String isFull() {
+        return "test";
     }
 
     int getCourseCode() {

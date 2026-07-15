@@ -11,7 +11,7 @@ class Pet {
     }
 
 
-     String eat(double feedAmount) {
+    String eat(double feedAmount) {
         if(petHunger <= 0.0) {
             return "Pet already full";
         }
@@ -25,7 +25,6 @@ class Pet {
         petHunger -= feedAmount;
         return "Feed successful.";
     }
-
     String getPetName() {
         return petName;
     }
