@@ -152,10 +152,15 @@ class EnrollmentService {
 
             if(studentOption < 1 || studentOption > student.size()) {
                 System.out.println("Out of range.");
+                continue;
             }
 
             Student selectedStudent = student.get(studentOption - 1);
 
+            if(course.isEmpty()) {
+                viewCourses();
+                return;
+            }
             viewCourses();
             System.out.println("Select a course to enroll: ");
             int courseOption;
@@ -173,43 +178,97 @@ class EnrollmentService {
             }
 
             Course selectedCourse = course.get(courseOption - 1);
-            String result1 = selectedStudent.enrollCourse();
-            int result2 = selectedCourse.addStudents();
-            System.out.println(result1);
-            System.out.println(result2);
-            System.out.println(selectedCourse.getAvailableSlots());
+            selectedStudent.enrollCourse(selectedCourse);
+            selectedCourse.addStudents(selectedStudent);
             return;
         }
     }
+
     void dropCourse() {
 
     }
     void viewStudentCourse() {
-        System.out.println("=====VIEW-STUDENTS=====");
-        if(student.isEmpty()) {
-            viewStudents();
-        }
+        while(true) {
+            System.out.println("=====VIEW-STUDENTS'-COURSE");
+            System.out.println("Enter a student name: ");
+            String view = scanner.nextLine();
 
-        for(int i = 0; i < student.size(); i++) {
-            Student viewS = student.get(i);
-            System.out.println("Student name: " + viewS.getStudentName() 
-                + " | Student ID: " + viewS.getStudentID());
-            System.out.println("Courses: ");
-            for(int j = 0; j < course.size(); j++) {
-                Course viewC = course.get(j);
-                System.out.println((j + 1) + ".) " + viewC.getCourseTitle() 
-                + " | Course code: " + viewC.getCourseCode() );
+            if(view.isEmpty()) {
+                System.out.println("Student field cannot be empty.");
+                return;
             }
-            System.out.println("Status: " + viewS.getIsEnrolled());
+
+            for(int i = 0; i < student.size(); i++) {
+                Student display = student.get(i);
+                if(view.equals(display.getStudentName())) {
+                    System.out.println("Student found.");
+                    System.out.println("Student name: " + display.getStudentName() + " | Student ID: " + display.getStudentID());
+                    display.displayCourse();
+                    return;
+                }
+            }
+            System.out.println("Student not found.");
+            return;
         }
     }
     void viewCourseStudent() {
+        while(true) {
+            System.out.println("=====VIEW-COURSE-STUDENT=====");
+            System.out.println("Enter a course name: ");
+            String view = scanner.nextLine();
 
+            if(view.isEmpty()) {
+                System.out.println("Course field cannot be empty.");
+                return;
+            }
+
+            for(int i = 0; i < course.size(); i++) {
+                Course display = course.get(i);
+                if(view.equals(display.getCourseTitle())) {
+                    System.out.println("Course found.");
+                    System.out.println("Course name: " + display.getCourseTitle() + " | Course code: " + display.getCourseCode());
+                    display.displayStudents();
+                    return;
+                }
+            }
+            System.out.println("Course not found.");
+            return;
+        }
     }
     void searchStudent() {
+        while(true) {
+            System.out.println("=====SEARCH-STUDENT=====");
+            System.out.println("Enter a student name: ");
+            String search = scanner.nextLine();
+            for(int i = 0; i < student.size(); i++) {
+                Student searchStudent = student.get(i);
+                if(search.equals(searchStudent.getStudentName())) {
+                    System.out.println("Student found.");
+                    System.out.println("Student name: " + searchStudent.getStudentName() + " | Student ID: " + searchStudent.getStudentID());
+                    return;
+                }
+            }
 
+            System.out.println("Student not found.");
+            return;
+        }
     }
     void searchCourse() {
+        while(true) {
+            System.out.println("=====SEARCH-COURSE=====");
+            System.out.println("Enter a course name: ");
+            String search = scanner.nextLine();
+            for(int i = 0; i < course.size(); i++) {
+                Course searchCourse = course.get(i);
+                if(search.equals(searchCourse.getCourseTitle())) {
+                    System.out.println("Course found.");
+                    System.out.println("Course name: " + searchCourse.getCourseTitle() + " | Course code: " + searchCourse.getCourseCode());
+                    return;
+                }
+            }
 
+            System.out.println("Course not found.");
+            return;
+        }
     }
 }

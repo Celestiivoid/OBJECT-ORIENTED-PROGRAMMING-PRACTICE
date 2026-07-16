@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 class Course {
     static Scanner scanner = new Scanner(System.in);
-    static ArrayList<Student> student = new ArrayList<>();
+    private ArrayList<Student> enrolledStudent = new ArrayList<>();
     private int courseCode;
     private String courseTitle;
     private int maxSlots;
@@ -16,8 +16,8 @@ class Course {
         this.availableSlots = availableSlots;
     }
 
-    int addStudents() {
-       return availableSlots--;   
+    void addStudents(Student student) {
+        enrolledStudent.add(student);
     }
     void removeStudents() {
 
@@ -26,7 +26,18 @@ class Course {
 
     }
 
+    void displayStudents() {
 
+        if(enrolledStudent.isEmpty()) {
+            System.out.println("No enrolled students.");
+            return;
+        }
+        
+        for(int i = 0; i< enrolledStudent.size(); i++) {
+            Student display = enrolledStudent.get(i);
+            System.out.println((i + 1) + ".) " + display.getStudentName());
+        }
+    }
     String isFull() {
         return "test";
     }

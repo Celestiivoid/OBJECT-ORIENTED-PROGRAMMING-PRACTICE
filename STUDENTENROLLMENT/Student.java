@@ -4,26 +4,17 @@ import java.util.ArrayList;
 
 class Student {
    static Scanner scanner = new Scanner(System.in);
-   static ArrayList<Course> course = new ArrayList<>();
+   private ArrayList<Course> enrolledCourse = new ArrayList<>();
 
     private int studentID;
     private String studentName;
-    private boolean isEnrolled;
     Student(int  studentID, String studentName) {
         this.studentID = studentID;
         this.studentName = studentName;
-        this.isEnrolled = false;
     }    
 
-    String enrollCourse() {
-        for(int i = 0; i < course.size(); i++) {
-            Course check = course.get(i);
-            if(check.getAvailableSlots() <= 0) {
-                return "No remaining slot for this subject.";
-            }
-        }
-        isEnrolled = true;
-        return "Successfully enrolled.";
+    void enrollCourse(Course course) {
+        enrolledCourse.add(course);
     }
     void dropCourse() {
 
@@ -32,13 +23,15 @@ class Student {
 
     }
     void displayCourse() {
-
-    }
-    String getIsEnrolled() {
-        if(isEnrolled) {
-            return "Enrolled";
+        if(enrolledCourse.isEmpty()) {
+            System.out.println("No enrolled course.");
+            return;
         }
-        return "Not enrolled";
+
+        for(int i = 0;  i < enrolledCourse.size(); i++) {
+            Course display = enrolledCourse.get(i);
+            System.out.println((i + 1) + ".) " + display.getCourseTitle());
+        }
     }
 
     int getStudentID() {
