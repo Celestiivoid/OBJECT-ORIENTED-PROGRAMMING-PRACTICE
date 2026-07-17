@@ -8,21 +8,32 @@ class Student {
 
     private int studentID;
     private String studentName;
+    private boolean isEnrolled;
     Student(int  studentID, String studentName) {
         this.studentID = studentID;
         this.studentName = studentName;
+        this.isEnrolled = false;
     }    
 
     void enrollCourse(Course course) {
+        if(enrolledCourse.contains(course)) {
+            System.out.println("You already enrolled for this subject.");
+            return;
+        }
+        isEnrolled = true;
         enrolledCourse.add(course);
     }
-    void dropCourse() {
 
-    }
-    void displayStudent() {
+    void dropCourse(Course course) {
+        enrolledCourse.remove(course);
 
+        if(enrolledCourse.isEmpty()) {
+            isEnrolled = false;
+        }
     }
+
     void displayCourse() {
+        
         if(enrolledCourse.isEmpty()) {
             System.out.println("No enrolled course.");
             return;
@@ -34,9 +45,19 @@ class Student {
         }
     }
 
+    String getIsEnrolled() {
+        if(isEnrolled) {
+            return "Enrolled";
+        }
+        else {
+            return "Not-Enrolled";
+        }
+    }
+
     int getStudentID() {
         return studentID;
     }
+
     String getStudentName() {
         return studentName;
     }

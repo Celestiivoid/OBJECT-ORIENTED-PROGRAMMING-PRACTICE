@@ -17,40 +17,43 @@ class Course {
     }
 
     void addStudents(Student student) {
+        if(availableSlots <= 0) {
+            System.out.println("This course is full.");
+            return;
+        }
         enrolledStudent.add(student);
+        availableSlots--;
     }
-    void removeStudents() {
+    void removeStudents(Student student) {
+        enrolledStudent.remove(student);
+        availableSlots++;
+    }
 
-    }
-    void displayCourse() {
-
-    }
 
     void displayStudents() {
-
         if(enrolledStudent.isEmpty()) {
             System.out.println("No enrolled students.");
             return;
         }
-        
+
         for(int i = 0; i< enrolledStudent.size(); i++) {
             Student display = enrolledStudent.get(i);
             System.out.println((i + 1) + ".) " + display.getStudentName());
         }
     }
-    String isFull() {
-        return "test";
-    }
 
     int getCourseCode() {
         return courseCode;
     }
+
     String getCourseTitle() {
         return courseTitle;
     }
+
     int getMaxSlot() {
         return maxSlots;
     }
+
     int getAvailableSlots() {
         return availableSlots;
     }

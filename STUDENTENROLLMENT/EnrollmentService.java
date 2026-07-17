@@ -185,7 +185,62 @@ class EnrollmentService {
     }
 
     void dropCourse() {
+        while(true) {
+            System.out.println("=====DROP-COURSE=====");
 
+            if(student.isEmpty()) {
+                viewStudents();
+            }
+            viewStudents();
+            System.out.println("Pick a student: ");
+            int option;
+
+            try {
+                option = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(option < 1 || option > student.size()) {
+                System.out.println("Out of range.");
+                continue;
+            }
+
+            Student selectedStudent = student.get(option - 1);
+
+
+            if(selectedStudent.getIsEnrolled().equals("Not-Enrolled")) {
+                System.out.println("Student not enrolled.");
+                return;
+            }
+
+
+            if(selectedStudent.getIsEnrolled().equals("Enrolled")) {
+                selectedStudent.displayCourse();
+            }
+
+            System.out.println("Pick a course to drop: ");
+            int option2;
+
+            try {
+                option2 = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(option2 < 1 || option2 > course.size()) {
+                System.out.println("Out of range.");
+                continue;
+            }
+
+            Course selectedCourse = course.get(option2 - 1);
+
+            selectedStudent.dropCourse(selectedCourse);
+            selectedCourse.removeStudents(selectedStudent);
+            return;
+        }
     }
     void viewStudentCourse() {
         while(true) {
@@ -202,6 +257,7 @@ class EnrollmentService {
                 Student display = student.get(i);
                 if(view.equals(display.getStudentName())) {
                     System.out.println("Student found.");
+                    System.out.println("Courses' enrolled: ");
                     System.out.println("Student name: " + display.getStudentName() + " | Student ID: " + display.getStudentID());
                     display.displayCourse();
                     return;
@@ -226,6 +282,7 @@ class EnrollmentService {
                 Course display = course.get(i);
                 if(view.equals(display.getCourseTitle())) {
                     System.out.println("Course found.");
+                    System.out.println("Enrolled students:");
                     System.out.println("Course name: " + display.getCourseTitle() + " | Course code: " + display.getCourseCode());
                     display.displayStudents();
                     return;
