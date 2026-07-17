@@ -16,13 +16,16 @@ class Course {
         this.availableSlots = availableSlots;
     }
 
-    void addStudents(Student student) {
+    String addStudents(Student student) {
         if(availableSlots <= 0) {
-            System.out.println("This course is full.");
-            return;
+            return "Course full";
+        }
+        if(enrolledStudent.contains(student)) {
+            return student.getStudentName() + " is already enrolled";
         }
         enrolledStudent.add(student);
         availableSlots--;
+        return "Successfully enrolled";
     }
     void removeStudents(Student student) {
         enrolledStudent.remove(student);
@@ -42,6 +45,14 @@ class Course {
         }
     }
 
+    Student getEnrolledStudent(int enrolledIndex) {
+        if(enrolledIndex < 1 || enrolledIndex > enrolledStudent.size()) {
+            System.out.println("Out of range!");
+            return null;
+        }
+        return enrolledStudent.get(enrolledIndex - 1);
+    }
+    
     int getCourseCode() {
         return courseCode;
     }

@@ -14,7 +14,7 @@ public class EnrollmentMain {
             System.out.println("[5] Enroll Student");
             System.out.println("[6] Drop Course");
             System.out.println("[7] View Student's Course");
-            System.out.println("[8] View Course's Studentsa");
+            System.out.println("[8] View Course's Students");
             System.out.println("[9] Search Student");
             System.out.println("[10] Search Course");
             System.out.println("[11] Exit");

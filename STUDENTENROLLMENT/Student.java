@@ -1,18 +1,14 @@
 package STUDENTENROLLMENT;
-import java.util.Scanner;
 import java.util.ArrayList;
 
 class Student {
-   static Scanner scanner = new Scanner(System.in);
    private ArrayList<Course> enrolledCourse = new ArrayList<>();
 
     private int studentID;
     private String studentName;
-    private boolean isEnrolled;
     Student(int  studentID, String studentName) {
         this.studentID = studentID;
         this.studentName = studentName;
-        this.isEnrolled = false;
     }    
 
     void enrollCourse(Course course) {
@@ -20,16 +16,11 @@ class Student {
             System.out.println("You already enrolled for this subject.");
             return;
         }
-        isEnrolled = true;
         enrolledCourse.add(course);
     }
 
     void dropCourse(Course course) {
         enrolledCourse.remove(course);
-
-        if(enrolledCourse.isEmpty()) {
-            isEnrolled = false;
-        }
     }
 
     void displayCourse() {
@@ -46,14 +37,21 @@ class Student {
     }
 
     String getIsEnrolled() {
-        if(isEnrolled) {
+        if(!enrolledCourse.isEmpty()) {
             return "Enrolled";
         }
         else {
-            return "Not-Enrolled";
+            return "Not-enrolled";
         }
     }
 
+    Course getEnrolledCourses(int enrolledIndex) {
+        if(enrolledIndex < 1 || enrolledIndex > enrolledCourse.size()) {
+            System.out.println("Out of range!");
+            return null;
+        }
+        return enrolledCourse.get(enrolledIndex - 1);
+    }
     int getStudentID() {
         return studentID;
     }

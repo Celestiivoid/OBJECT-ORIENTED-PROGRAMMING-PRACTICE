@@ -178,8 +178,13 @@ class EnrollmentService {
             }
 
             Course selectedCourse = course.get(courseOption - 1);
-            selectedStudent.enrollCourse(selectedCourse);
-            selectedCourse.addStudents(selectedStudent);
+            
+            String result = selectedCourse.addStudents(selectedStudent);
+
+            if(result.equals("Successfully enrolled")) {
+                selectedStudent.enrollCourse(selectedCourse);
+            }
+            System.out.println(result);
             return;
         }
     }
@@ -187,11 +192,12 @@ class EnrollmentService {
     void dropCourse() {
         while(true) {
             System.out.println("=====DROP-COURSE=====");
-
+            
             if(student.isEmpty()) {
-                viewStudents();
+                forDrop();
+                return;
             }
-            viewStudents();
+            forDrop();
             System.out.println("Pick a student: ");
             int option;
 
@@ -229,22 +235,35 @@ class EnrollmentService {
                 System.out.println("Numbers only.");
                 continue;
             }
+            
+            Course selectedCourse = selectedStudent.getEnrolledCourses(option2);
 
-            if(option2 < 1 || option2 > course.size()) {
-                System.out.println("Out of range.");
+            if(selectedCourse == null) {
                 continue;
             }
-
-            Course selectedCourse = course.get(option2 - 1);
-
             selectedStudent.dropCourse(selectedCourse);
             selectedCourse.removeStudents(selectedStudent);
             return;
         }
     }
+
+    void forDrop() {
+        int counter = 1;
+        for(int i = 0; i < student.size(); i++) {
+            Student display = student.get(i);
+                if(display.getIsEnrolled().equals("Enrolled")) {
+                    System.out.println((counter + ".) " 
+                    + "Student name: " + display.getStudentName() 
+                    + " | Student ID: " + display.getStudentID()));
+                    counter++;
+            }
+        }
+        return;
+    }
+
     void viewStudentCourse() {
         while(true) {
-            System.out.println("=====VIEW-STUDENTS'-COURSE");
+            System.out.println("=====VIEW-STUDENTS'-COURSE=====");
             System.out.println("Enter a student name: ");
             String view = scanner.nextLine();
 
@@ -301,7 +320,7 @@ class EnrollmentService {
                 Student searchStudent = student.get(i);
                 if(search.equals(searchStudent.getStudentName())) {
                     System.out.println("Student found.");
-                    System.out.println("Student name: " + searchStudent.getStudentName() + " | Student ID: " + searchStudent.getStudentID());
+                    System.out.println("Student name: " + searchStudent.getStudentName() + " | Student ID: " + searchStudent.getStudentID() + " | Status: " + searchStudent.getIsEnrolled());
                     return;
                 }
             }
