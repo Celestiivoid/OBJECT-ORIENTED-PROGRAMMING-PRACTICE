@@ -62,15 +62,32 @@ class FileManager {
     void loadEnrollment(ArrayList<Student> students, ArrayList<Course> courses) throws IOException {
         BufferedReader load = new BufferedReader(new FileReader("enrollment.csv"));
         String line;
-
+        
         while((line = load.readLine()) != null) {
             String [] enrollmentData = line.split(",");
-            int enrolledID = Integer.parseInt(enrollmentData[0]);
+            int enrolledStudentID = Integer.parseInt(enrollmentData[0]);
             int enrolledCourseCode = Integer.parseInt(enrollmentData[1]);
-            Student targetS = students.get(enrolledID);
-            Course targetC = courses.get(enrolledCourseCode);
-            targetS.enrollCourse(targetC);
-            targetC.addStudents(targetS);
+            Student targetS = null;
+            Course targetC = null;
+
+            for(Student student : students) {
+                if(student.getStudentID() == enrolledStudentID) {
+                    targetS = student;
+                    break;
+                }
+            }
+
+            for(Course course : courses) {
+                if(course.getCourseCode() == enrolledCourseCode) {
+                    targetC = course;
+                    break;
+                }
+            } 
+
+            if(targetS != null && targetC != null) {
+                targetS.enrollCourse(targetC);
+                targetC.addStudents(targetS);
+            }
         }
         load.close();
     }

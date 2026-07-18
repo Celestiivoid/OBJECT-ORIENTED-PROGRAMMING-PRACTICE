@@ -64,8 +64,18 @@ public class FileBasedEnrollmentMain {
                 case 8 -> service.viewCourseStudent();
                 case 9 -> service.searchStudent();
                 case 10 -> service.searchCourse();
-                case 11 -> manager.saveStudents(EnrollmentService.student);
-                case 12 -> manager.loadStudents(EnrollmentService.student);
+                case 11 -> {
+                    manager.saveStudents(EnrollmentService.student);
+                    manager.saveCourse(EnrollmentService.course);
+                    manager.saveEnrollment(EnrollmentService.student, EnrollmentService.course);
+                    System.out.println("Data save successfully!");
+                }
+                case 12 -> {
+                    manager.loadStudents(EnrollmentService.student);
+                    manager.loadCourse(EnrollmentService.course);
+                    manager.loadEnrollment(EnrollmentService.student, EnrollmentService.course);
+                    System.out.println("Data loaded successfully!");
+                }
             }
 
 
