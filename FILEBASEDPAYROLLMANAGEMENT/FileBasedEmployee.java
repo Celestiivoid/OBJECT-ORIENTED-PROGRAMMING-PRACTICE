@@ -23,19 +23,20 @@ class Employee {
         this.hourlyRate = hourlyRate;
         this.hoursWorked = hoursWorked;
         this.overtimeHours = overtimeHours; 
-
     }
-    void calculateBasicSalary() {
-
+    double calculateBasicSalary() {
+        basicSalary = hourlyRate * hoursWorked;
+        return basicSalary;
     }
-    void calculateOvertime() {
-
+    double calculateOvertime() {
+        overtimePay = hourlyRate * overtimeHours;
+        return overtimePay;
     }
-    void calculateNetSalary() {
-
+    double calculateNetSalary() {
+        netSalary = basicSalary + overtimePay;
+        return netSalary;
     }
     void displayEmployee() {
-
     }
 
     int getEmployeeID() {

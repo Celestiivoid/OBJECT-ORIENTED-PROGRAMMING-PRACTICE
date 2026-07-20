@@ -34,7 +34,7 @@ class FileManager {
             double hourlyRate = Double.parseDouble(employeeData[4]);
             int hoursWorks = Integer.parseInt(employeeData[5]);
             int overtimeHours = Integer.parseInt(employeeData[6]);
-            employees.add( new Employee(employeeID, employeeName, department, position, hourlyRate, hoursWorks, overtimeHours));
+            employees.add(new Employee(employeeID, employeeName, department, position, hourlyRate, hoursWorks, overtimeHours));
         }
         load.close();
     }

@@ -100,8 +100,11 @@ class FileBasedService {
                 Employee view = employee.get(i);
                 System.out.println((i + 1) + ".) " 
                 + "Employee ID: " + view.getEmployeeID() 
-                + " | Employee name: " + view.getEmployeeName() 
-                + " | Position: " + view.getPosition());
+                + "\n | Employee name: " + view.getEmployeeName() 
+                + "\n | Position: " + view.getPosition() 
+                + "\n | Basic salary: " + view.calculateBasicSalary() 
+                + "\n | Overtime pay: " + view.calculateOvertime() 
+                + "\n | Net salary: " + view.calculateNetSalary());
             }
     }
     void forUpdateEmployee() {
@@ -117,6 +120,37 @@ class FileBasedService {
                 + " | Employee name: " + view.getEmployeeName() 
                 + " | Position: " + view.getPosition());
             }
+    }
+    void forRemoveEmployee() {
+        if(employee.isEmpty()) {
+                System.out.println("No Available employee.");
+                return;
+            }
+
+            for(int i = 0; i < employee.size(); i++) {
+                Employee view = employee.get(i);
+                System.out.println((i + 1) + ".) " 
+                + "Employee ID: " + view.getEmployeeID() 
+                + " | Employee name: " + view.getEmployeeName() 
+                + " | Position: " + view.getPosition());
+            }
+    }
+    void forProcessEmployee() {
+        if(employee.isEmpty()) {
+                System.out.println("No Available employee.");
+                return;
+            }
+
+            for(int i = 0; i < employee.size(); i++) {
+                Employee view = employee.get(i);
+                System.out.println((i + 1) + ".) " 
+                + "Employee ID: " + view.getEmployeeID() 
+                + " | Employee name: " + view.getEmployeeName() 
+                + " | Position: " + view.getPosition());
+            }
+    }
+    void forViewProcessedPayrol(Payroll payroll) {
+
     }
     void searchEmployee() {
         while(true) {
@@ -145,6 +179,7 @@ class FileBasedService {
 
             if(employee.isEmpty()) {
                 forUpdateEmployee();
+                return;
             }
             forUpdateEmployee();
             System.out.println("Select an employee to update: ");
@@ -243,13 +278,72 @@ class FileBasedService {
         }
     }
     void removeEmployee() {
+        while(true) {
+            System.out.println("=====REMOVE-EMPLOYEE=====");
+            if(employee.isEmpty()) {
+                forRemoveEmployee();
+                return;
+            }
+            forRemoveEmployee();
+            System.out.println("Pick an employee to remove: ");
+            int option;
 
+            try {
+                option = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(option < 1 || option > employee.size()) {
+                System.out.println("Out of range.");
+                continue;
+            }
+            else {
+                employee.remove(option - 1);
+                System.out.println("Successfully removed employee.");
+                return;
+            }
+        }
     }
     void processPayroll() {
+        while(true) {
+            System.out.println("=====PROCESS-PAYROLL=====");
+            if(employee.isEmpty()) {
+                forProcessEmployee();
+                return;
+            }
+            forProcessEmployee();
+            System.out.println("Pick an employee to process: ");
+            int option;
 
+            try {
+                option = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
+
+            if(option < 1 || option > employee.size()) {
+                System.out.println("Out of range.");
+                continue;
+            }
+            Employee selectedEmployee = employee.get(option - 1);
+            Payroll processedPayroll = new Payroll();
+            String result = processedPayroll.computePayroll(selectedEmployee);
+            System.out.println(result);
+            return;
+        }
     }
     void viewPayroll() {
-
+        if(payroll.isEmpty()) {
+            System.out.println("No processed employee.");
+            return;
+        }
+        for(int i = 0; i < payroll.size(); i++) {
+            Payroll view = payroll.get(i);
+            System.out.println("Employee name: " + view.getEmployeeName());
+        }
     }
     void viewPayslip() {
 

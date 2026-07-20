@@ -42,6 +42,8 @@ public class FileBasedPayrollMain {
                 case 3 -> service.searchEmployee();
                 case 4 -> service.updateEmployee();
                 case 5 -> service.removeEmployee();
+                case 6 -> service.processPayroll();
+                case 7 -> service.viewPayroll();
                 case 9 -> {
                     manager.saveEmployees(FileBasedService.employee);
                     System.out.println("Data saved succesfully.");
