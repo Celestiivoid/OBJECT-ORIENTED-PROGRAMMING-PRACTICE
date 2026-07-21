@@ -98,13 +98,7 @@ class FileBasedService {
 
             for(int i = 0; i < employee.size(); i++) {
                 Employee view = employee.get(i);
-                System.out.println((i + 1) + ".) " 
-                + "Employee ID: " + view.getEmployeeID() 
-                + "\n | Employee name: " + view.getEmployeeName() 
-                + "\n | Position: " + view.getPosition() 
-                + "\n | Basic salary: " + view.calculateBasicSalary() 
-                + "\n | Overtime pay: " + view.calculateOvertime() 
-                + "\n | Net salary: " + view.calculateNetSalary());
+                view.displayEmployee();
             }
     }
     void forUpdateEmployee() {
@@ -329,20 +323,20 @@ class FileBasedService {
                 continue;
             }
             Employee selectedEmployee = employee.get(option - 1);
-            Payroll processedPayroll = new Payroll();
-            String result = processedPayroll.computePayroll(selectedEmployee);
-            System.out.println(result);
+            Payroll newPayroll = new Payroll(selectedEmployee);
+            System.out.println(newPayroll.computePayroll());
+            payroll.add(newPayroll);
             return;
         }
     }
     void viewPayroll() {
-        if(payroll.isEmpty()) {
+        if(employee.isEmpty()) {
             System.out.println("No processed employee.");
             return;
         }
         for(int i = 0; i < payroll.size(); i++) {
             Payroll view = payroll.get(i);
-            System.out.println("Employee name: " + view.getEmployeeName());
+            view.displayPayroll();
         }
     }
     void viewPayslip() {

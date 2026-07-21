@@ -7,10 +7,6 @@ class Employee {
     private double hourlyRate;
     private int hoursWorked;
     private int overtimeHours;
-    private double basicSalary;
-    private double overtimePay;
-    private double deduction;
-    private double netSalary;
 
     Employee(int employeeID, 
         String employeeName, String department, 
@@ -25,20 +21,45 @@ class Employee {
         this.overtimeHours = overtimeHours; 
     }
     double calculateBasicSalary() {
-        basicSalary = hourlyRate * hoursWorked;
-        return basicSalary;
+        return hourlyRate * hoursWorked;
     }
     double calculateOvertime() {
-        overtimePay = hourlyRate * overtimeHours;
-        return overtimePay;
-    }
-    double calculateNetSalary() {
-        netSalary = basicSalary + overtimePay;
-        return netSalary;
+        return hourlyRate * overtimeHours * 1.25;
     }
     void displayEmployee() {
+        System.out.println("Employee ID: " + getEmployeeID());
+        System.out.println("Employees' name: " + getEmployeeName());
+        System.out.println("Department: " + getDepartment());
+        System.out.println("Position: " + getPosition());
+        System.out.println("Hourly rate: " + getHourlyRate());
+        System.out.println("Hours worked: " + getHoursWorked());
+        System.out.println("Overtime hours: " + getOvertimeHours());
     }
 
+    //setters
+    void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+    void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+    void setDepartment(String department) {
+        this.department = department;
+    }
+    void setPosition(String position) {
+        this.position = position;
+    }
+    void setHourlyRate(double hourlyRate) {
+        this.hourlyRate = hourlyRate;
+    }
+    void setHoursWorked(int hoursWorked) {
+        this.hoursWorked = hoursWorked;
+    }
+    void setOvertimeHours(int overtimeHours) {
+        this.overtimeHours = overtimeHours;
+    }
+
+    //getters
     int getEmployeeID() {
         return employeeID;
     }

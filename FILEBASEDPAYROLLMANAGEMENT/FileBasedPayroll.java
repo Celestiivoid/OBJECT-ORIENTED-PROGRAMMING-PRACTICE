@@ -1,11 +1,6 @@
 package FILEBASEDPAYROLLMANAGEMENT;
-import java.util.ArrayList;
-import java.util.Random;
 class Payroll {
-    static Random random = new Random();
-    static ArrayList<Employee> processedEmployee = new ArrayList<>();
-    static private int payrollID = random.nextInt(1000,9999);
-    private String employeeName;
+    private Employee employee;
     private double basicPay;
     private double overtimePay;
     private double taxDeducation;
@@ -15,30 +10,24 @@ class Payroll {
     private double totalDeduction;
     private double netPay;
 
-    String computePayroll(Employee employees) {
-        employeeName = employees.getEmployeeName();
-        basicPay = employees.calculateBasicSalary();
-        overtimePay = employees.calculateOvertime();
-        netPay = employees.calculateNetSalary();
-        if(processedEmployee.contains(employees)) {
-            return employees.getEmployeeName() + " is already processed.";
-        }
+    Payroll(Employee employee) {
+        this.employee = employee;
+    }
+    String computePayroll() {
+        basicPay = employee.calculateBasicSalary();
+        overtimePay = employee.calculateOvertime();
+        netPay = basicPay + overtimePay;
 
-        processedEmployee.add(employees);
-        return "Successfully processed: " + employees.getEmployeeName();
+        return "Successfully processed: " + employee.getEmployeeName();
     }
     void displayPayroll() {
-        System.out.println("Employee name: " + getEmployeeName());
-        System.out.println("Basic pay: " + getBasicPay());
+        System.out.println("Employee ID: " + getEmployeeID());
+        System.out.println("Bsaic salary: " + basicPay);
     }
     void displayPayslip() {
-
     }
 
-    String getEmployeeName() {
-        return employeeName;
-    }
-    double getBasicPay() {
-        return basicPay;
+    int getEmployeeID() {
+        return employee.getEmployeeID();
     }
 }
