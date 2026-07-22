@@ -7,7 +7,7 @@ class FileBasedService {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Employee> employee = new ArrayList<>();
     static ArrayList<Payroll> payroll = new ArrayList<>();
-    static int employeeID = random.nextInt(1001,9999);
+    static int employeeID = random.nextInt(1000,9999);
     
     void addEmployee() {
         while(true) {
@@ -301,6 +301,7 @@ class FileBasedService {
         }
     }
     void processPayroll() {
+        int payrollID = random.nextInt(1000, 9999);
         while(true) {
             System.out.println("=====PROCESS-PAYROLL=====");
             if(employee.isEmpty()) {
@@ -323,14 +324,15 @@ class FileBasedService {
                 continue;
             }
             Employee selectedEmployee = employee.get(option - 1);
-            Payroll newPayroll = new Payroll(selectedEmployee);
+            Payroll newPayroll = new Payroll(selectedEmployee, payrollID);
             System.out.println(newPayroll.computePayroll());
             payroll.add(newPayroll);
+            System.out.println("Payroll ID: " + payrollID);
             return;
         }
     }
     void viewPayroll() {
-        if(employee.isEmpty()) {
+        if(payroll.isEmpty()) {
             System.out.println("No processed employee.");
             return;
         }
@@ -340,15 +342,33 @@ class FileBasedService {
         }
     }
     void viewPayslip() {
+        while(true) {
+            if(payroll.isEmpty()) {
+                System.out.println("No processed employee.");
+                return;
+            }
 
-    }
-    void calculateSalary() {
+            System.out.println("Enter payroll ID: ");
+            int payrollID;
 
-    }
-    void calculateOvertime() {
+            try {
+                payrollID = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Numbers only.");
+                continue;
+            }
 
-    }
-    void calculateDeduction() {
-
+            for(int i = 0; i < payroll.size(); i++) {
+                Payroll payslip = payroll.get(i);
+                if(payrollID == payslip.getPayrollID()) {
+                    payslip.displayPayslip();
+                }
+            }
+            if(payrollID < 1000 || payrollID > 9999) {
+                System.out.println("4 Digits only!");
+                continue;
+            }
+            return;
+        }
     }
 }

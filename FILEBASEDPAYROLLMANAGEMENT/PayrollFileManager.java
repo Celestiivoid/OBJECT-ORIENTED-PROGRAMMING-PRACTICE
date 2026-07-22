@@ -38,10 +38,23 @@ class FileManager {
         }
         load.close();
     }
-    void savePayroll() {
-
+    void savePayroll(ArrayList<Payroll> payrolls) throws IOException {
+        BufferedWriter save = new BufferedWriter(new FileWriter("records.csv"));
+            for(Payroll payroll : payrolls) {
+                save.write(payroll.getEmployeeID()
+                + "," + payroll.getPayrollID() 
+                + "," + payroll.getDepartment()
+                + "," + payroll.getPosition()
+                + "," + payroll.getBasicSalary()
+                + "," + payroll.getOvertimePay()
+                + "," + payroll.getTaxDeduction()
+                + "," + payroll.getSSSDeduction());
+                save.newLine();
+            }
+        save.close();
     }
-    void loadPayroll() {
-
+    void loadPayroll(ArrayList<Payroll> payrolls) throws IOException {
+        BufferedReader load = new BufferedReader(new FileReader("records.csv"));
+        String line;
     }
 }

@@ -44,12 +44,15 @@ public class FileBasedPayrollMain {
                 case 5 -> service.removeEmployee();
                 case 6 -> service.processPayroll();
                 case 7 -> service.viewPayroll();
+                case 8 -> service.viewPayslip();
                 case 9 -> {
                     manager.saveEmployees(FileBasedService.employee);
+                    manager.savePayroll(FileBasedService.payroll);
                     System.out.println("Data saved succesfully.");
                 }
                 case 10 -> {
                     manager.loadEmployees(FileBasedService.employee);
+                    manager.loadPayroll(FileBasedService.payroll);
                     System.out.println("Data loaded successfully.");
                 }
             }
