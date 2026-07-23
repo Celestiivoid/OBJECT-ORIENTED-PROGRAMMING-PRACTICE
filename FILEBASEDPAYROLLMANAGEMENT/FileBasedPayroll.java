@@ -31,6 +31,9 @@ class Payroll {
         totalDeduction = taxDeduction + sssDeduction + philHealthDeduction + pagIbigDeduction;
         finalNetPay = grossPay - totalDeduction;
 
+        Payroll newPayroll = new Payroll(employee, payrollID);
+        record.add(newPayroll);
+
         return "Successfully processed: " + employee.getEmployeeName();
     }
     void displayPayroll() {
@@ -86,5 +89,17 @@ class Payroll {
     }
     double getSSSDeduction() {
         return sssDeduction;
+    }
+    double getPhilHealth() {
+        return philHealthDeduction;
+    }
+    double getPagIbigDeduction() {
+        return pagIbigDeduction;
+    }
+    double getFinalNetPay() {
+        return finalNetPay;
+    }
+    ArrayList<Payroll> getRecords() {
+        return record;
     }
 }

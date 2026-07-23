@@ -42,9 +42,7 @@ class FileManager {
         BufferedWriter save = new BufferedWriter(new FileWriter("records.csv"));
             for(Payroll payroll : payrolls) {
                 save.write(payroll.getEmployeeID()
-                + "," + payroll.getPayrollID() 
-                + "," + payroll.getDepartment()
-                + "," + payroll.getPosition()
+                + "," + payroll.getPayrollID()
                 + "," + payroll.getBasicSalary()
                 + "," + payroll.getOvertimePay()
                 + "," + payroll.getTaxDeduction()
@@ -56,5 +54,17 @@ class FileManager {
     void loadPayroll(ArrayList<Payroll> payrolls) throws IOException {
         BufferedReader load = new BufferedReader(new FileReader("records.csv"));
         String line;
+
+        while((line = load.readLine()) != null) {
+            String [] loadPayroll = line.split(",");
+            int payrollID = Integer.parseInt(loadPayroll[0]);
+            Payroll targetEmployee = null;
+
+            for(Payroll payroll : payrolls) {
+                if(payroll.getPayrollID() == payrollID) {
+                    targetEmployee = payroll;
+                }
+            }
+        }
     }
 }
