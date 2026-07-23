@@ -20,6 +20,30 @@ class Payroll {
         this.employee = employee;
         this.payrollID = payrollID;
     }
+    Payroll(Employee employee,
+            int payrollID,
+            double basicPay,
+            double overtimePay,
+            double taxDeduction,
+            double sssDeduction,
+            double philHealthDeduction,
+            double pagIbigDeduction,
+            double totalDeduction,
+            double grossPay,
+            double finalNetPay) {
+
+        this.employee = employee;
+        this.payrollID = payrollID;
+        this.basicPay = basicPay;
+        this.overtimePay = overtimePay;
+        this.taxDeduction = taxDeduction;
+        this.sssDeduction = sssDeduction;
+        this.philHealthDeduction = philHealthDeduction;
+        this.pagIbigDeduction = pagIbigDeduction;
+        this.totalDeduction = totalDeduction;
+        this.grossPay = grossPay;
+        this.finalNetPay = finalNetPay;
+    }
     String computePayroll() {
         basicPay = employee.calculateBasicSalary();
         overtimePay = employee.calculateOvertime();
@@ -30,9 +54,6 @@ class Payroll {
         pagIbigDeduction = grossPay * 0.12;
         totalDeduction = taxDeduction + sssDeduction + philHealthDeduction + pagIbigDeduction;
         finalNetPay = grossPay - totalDeduction;
-
-        Payroll newPayroll = new Payroll(employee, payrollID);
-        record.add(newPayroll);
 
         return "Successfully processed: " + employee.getEmployeeName();
     }
@@ -84,6 +105,9 @@ class Payroll {
     double getOvertimePay() {
         return overtimePay;
     }
+    double getGrossPay() {
+        return grossPay;
+    }
     double getTaxDeduction() {
         return taxDeduction;
     }
@@ -99,6 +123,10 @@ class Payroll {
     double getFinalNetPay() {
         return finalNetPay;
     }
+    double getTotalDeduction() {
+        return totalDeduction;
+    }
+
     ArrayList<Payroll> getRecords() {
         return record;
     }

@@ -1,7 +1,6 @@
 package FILEBASEDPAYROLLMANAGEMENT;
 import java.io.IOException;
 import java.util.Scanner;
-
 public class FileBasedPayrollMain {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws IOException{
@@ -52,7 +51,7 @@ public class FileBasedPayrollMain {
                 }
                 case 10 -> {
                     manager.loadEmployees(FileBasedService.employee);
-                    manager.loadPayroll(FileBasedService.payroll);
+                    manager.loadPayroll(FileBasedService.employee, FileBasedService.payroll);
                     System.out.println("Data loaded successfully.");
                 }
             }

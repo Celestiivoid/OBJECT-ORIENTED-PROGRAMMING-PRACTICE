@@ -308,6 +308,7 @@ class FileBasedService {
                 forProcessEmployee();
                 return;
             }
+
             forProcessEmployee();
             System.out.println("Pick an employee to process: ");
             int option;
@@ -324,10 +325,15 @@ class FileBasedService {
                 continue;
             }
             Employee selectedEmployee = employee.get(option - 1);
+
             Payroll newPayroll = new Payroll(selectedEmployee, payrollID);
+
             System.out.println(newPayroll.computePayroll());
+
             payroll.add(newPayroll);
+
             System.out.println("Payroll ID: " + payrollID);
+
             return;
         }
     }

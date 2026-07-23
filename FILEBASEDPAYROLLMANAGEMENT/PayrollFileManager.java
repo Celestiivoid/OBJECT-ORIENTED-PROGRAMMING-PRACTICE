@@ -44,27 +44,61 @@ class FileManager {
                 save.write(payroll.getEmployeeID()
                 + "," + payroll.getPayrollID()
                 + "," + payroll.getBasicSalary()
-                + "," + payroll.getOvertimePay()
+                + "," + payroll.getOvertimePay() 
+                + "," + payroll.getGrossPay()
                 + "," + payroll.getTaxDeduction()
-                + "," + payroll.getSSSDeduction());
+                + "," + payroll.getSSSDeduction() 
+                + "," + payroll.getPhilHealth() 
+                + "," + payroll.getPagIbigDeduction() 
+                + "," + payroll.getTotalDeduction() 
+                + "," + payroll.getFinalNetPay());
                 save.newLine();
             }
         save.close();
     }
-    void loadPayroll(ArrayList<Payroll> payrolls) throws IOException {
+    void loadPayroll(ArrayList<Employee> employees,ArrayList<Payroll> payrolls) throws IOException {
         BufferedReader load = new BufferedReader(new FileReader("records.csv"));
         String line;
 
         while((line = load.readLine()) != null) {
             String [] loadPayroll = line.split(",");
-            int payrollID = Integer.parseInt(loadPayroll[0]);
-            Payroll targetEmployee = null;
+            int employeeID = Integer.parseInt(loadPayroll[0]);
+            int payrollID = Integer.parseInt(loadPayroll[1]);
+            double basicSalary = Double.parseDouble(loadPayroll[2]);
+            double overtimePay = Double.parseDouble(loadPayroll[3]);
+            double grossPay = Double.parseDouble(loadPayroll[4]);
+            double taxDeduction = Double.parseDouble(loadPayroll[5]);
+            double sssDeduction = Double.parseDouble(loadPayroll[6]);
+            double philHealthDeduction = Double.parseDouble(loadPayroll[7]);
+            double pagIbigDeduction = Double.parseDouble(loadPayroll[8]);
+            double totalDeduction = Double.parseDouble(loadPayroll[9]);
+            double finalSalary = Double.parseDouble(loadPayroll[10]);
+            Employee targetEmployee = null;
 
-            for(Payroll payroll : payrolls) {
-                if(payroll.getPayrollID() == payrollID) {
-                    targetEmployee = payroll;
+            for(Employee employee : employees) {
+                if(employee.getEmployeeID() == employeeID) {
+                    targetEmployee = employee;
+                    break;
                 }
             }
+
+            if(targetEmployee != null) {
+                Payroll newPayroll = new Payroll(
+                    targetEmployee, 
+                    payrollID, 
+                    basicSalary, 
+                    overtimePay, 
+                    taxDeduction, 
+                    sssDeduction, 
+                    philHealthDeduction, 
+                    pagIbigDeduction, 
+                    totalDeduction, 
+                    grossPay, 
+                    finalSalary);
+
+                    payrolls.add(newPayroll);
+            }
         }
+        load.close();
     }
 }
