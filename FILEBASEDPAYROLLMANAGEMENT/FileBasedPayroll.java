@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 class Payroll {
     static ArrayList<Payroll> record = new ArrayList<>();
+    private static final double TAX = 0.05;
+    private static final double SSS_RATE = 0.02;
+    private static final double PHIL_HEALTH_RATE = 0.04;
+    private static final double PAG_IBIG_RATE = 0.07; 
     private int payrollID;
     private Employee employee;
     private double basicPay;
@@ -48,10 +52,10 @@ class Payroll {
         basicPay = employee.calculateBasicSalary();
         overtimePay = employee.calculateOvertime();
         grossPay = basicPay + overtimePay;
-        taxDeduction =  grossPay * 0.10;
-        sssDeduction = grossPay * 0.05;
-        philHealthDeduction = grossPay * 0.08;
-        pagIbigDeduction = grossPay * 0.12;
+        taxDeduction =  grossPay * TAX;
+        sssDeduction = grossPay * SSS_RATE;
+        philHealthDeduction = grossPay * PHIL_HEALTH_RATE;
+        pagIbigDeduction = grossPay * PAG_IBIG_RATE;
         totalDeduction = taxDeduction + sssDeduction + philHealthDeduction + pagIbigDeduction;
         finalNetPay = grossPay - totalDeduction;
 
