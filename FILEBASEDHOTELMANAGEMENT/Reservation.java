@@ -1,0 +1,5 @@
+package FILEBASEDHOTELMANAGEMENT;
+
+class Reservation {
+    
+}
